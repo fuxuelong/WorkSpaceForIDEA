@@ -4,6 +4,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
+/**
+ * @author fuxuelong
+ */
+@SuppressWarnings("ALL")
 @Entity
 public class Role implements GrantedAuthority {
 
