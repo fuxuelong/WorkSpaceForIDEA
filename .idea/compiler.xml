@@ -9,12 +9,14 @@
         <module name="auth-service" />
         <module name="chapter14" />
         <module name="eureka-server" />
+        <module name="service-hi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="auth-service" target="1.8" />
       <module name="chapter14" target="1.8" />
       <module name="eureka-server" target="1.8" />
+      <module name="service-hi" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

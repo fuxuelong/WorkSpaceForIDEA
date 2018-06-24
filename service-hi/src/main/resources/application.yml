@@ -1,0 +1,28 @@
+eureka:
+  client:
+    service-url:
+      defaultzone: http://localhost:8761/eureka/
+server:
+  port: 8762
+spring:
+  application:
+    name: serviece-hi
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-cloud-auth?useUnicode=true&characterEncoding=utf8characterSetResults=utf-8&useSSl=false
+    data-username: root
+    data-password: 12345678
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:5000/uaa/users/current
+    client:
+      id: service-hi
+      client-secret: 123456
+      access-token-uri: http://localhost:5000/uaa/oauth/token
+      authorized-grant-types: client_credentails,password
+      scope: server
