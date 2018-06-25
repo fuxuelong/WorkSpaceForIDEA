@@ -9,9 +9,9 @@ spring:
     name: serviece-hi
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring-cloud-auth?useUnicode=true&characterEncoding=utf8characterSetResults=utf-8&useSSl=false
-    data-username: root
-    data-password: 12345678
+    url: jdbc:mysql://localhost:3306/spring-security?useUnicode=true&characterEncoding=utf-8&characterSetResult=utf-8&useSSL=false
+    username: root
+    password: 12345678
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,8 +21,8 @@ security:
     resource:
       user-info-uri: http://localhost:5000/uaa/users/current
     client:
-      id: service-hi
       client-secret: 123456
       access-token-uri: http://localhost:5000/uaa/oauth/token
-      authorized-grant-types: client_credentails,password
+      authorized-grant-types: client_credentials,password
       scope: server
+      client-id: service-hi

@@ -10,6 +10,7 @@
         <module name="chapter14" />
         <module name="eureka-server" />
         <module name="service-hi" />
+        <module name="user-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -17,6 +18,7 @@
       <module name="chapter14" target="1.8" />
       <module name="eureka-server" target="1.8" />
       <module name="service-hi" target="1.8" />
+      <module name="user-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
