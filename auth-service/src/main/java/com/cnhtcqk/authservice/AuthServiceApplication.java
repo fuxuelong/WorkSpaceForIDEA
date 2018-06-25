@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
@@ -20,40 +21,39 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableEurekaClient
+@EnableResourceServer
 public class AuthServiceApplication {
-    @Autowired
-    @Qualifier("dataSource")
-    private DataSource dataSource;
+
     public static void main(String[] args) {
         SpringApplication.run(AuthServiceApplication.class, args);
     }
+
+    @Autowired
+    @Qualifier("dataSource")
+    private DataSource dataSource;
 
     @Configuration
     @EnableAuthorizationServer
     protected  class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-        //private TokenStore tokenStore = new InMemoryTokenStore();
-
-        JdbcTokenStore tokenStore=new JdbcTokenStore(dataSource);
+        JdbcTokenStore tokenStore = new JdbcTokenStore(dataSource);
 
         @Autowired
-        @Qualifier("authenticationManager")
+        @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
 
         @Autowired
         private UserServiceDetail userServiceDetail;
 
-
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
             clients.inMemory()
                     .withClient("browser")
                     .authorizedGrantTypes("refresh_token", "password")
                     .scopes("ui")
                     .and()
                     .withClient("service-hi")
-                    .secret("123456")
+                    .secret("{noop}123456")
                     .authorizedGrantTypes("client_credentials", "refresh_token","password")
                     .scopes("server");
 
@@ -74,5 +74,8 @@ public class AuthServiceApplication {
                     .checkTokenAccess("isAuthenticated()");
 
         }
+
     }
+
 }
+

@@ -1,6 +1,5 @@
 package com.cnhtcqk.authservice.entity;
 
-import com.cnhtcqk.authservice.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;

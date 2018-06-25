@@ -20,28 +20,29 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserServiceDetail userServiceDetail;
+
+
     @Override
-    protected  void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests().anyRequest().authenticated()
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .csrf().disable();
-    }
 
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userServiceDetail).passwordEncoder(new BCryptPasswordEncoder());
     }
+
     @Override
     @Bean
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 }
